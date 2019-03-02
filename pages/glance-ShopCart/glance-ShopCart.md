@@ -1,3 +1,5 @@
+Glance ShopCart 小程序页面模板
+-----------------------------
 ##组件名称：  
 >glance 店铺购物车-小程序模板页 `glanceShopCart`  
 >  
