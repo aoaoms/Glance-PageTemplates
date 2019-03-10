@@ -19,18 +19,18 @@
 			<view style="width: 98%;text-align: center;">
 				<!-- 右侧顶部广告图 -->
 				<view style="margin-top: 10px; background-color: #ffffff;width: 100%;z-index: 10;">
-					<image :src="activebanner.src" mode="scaleToFill" @error="imgerr" style="height: 120px;width: 90%;" @click="clickitemhref(activebanner.imghref)"></image>
+					<image :src="activebanner.src" mode="scaleToFill" @error="imgerr" style="height: 120px;width: 90%;" :lazy-load="true" @click="clickitemhref(activebanner.imghref)"></image>
 				</view>
 				<!-- 左侧主分类列表 -->
 				<scroll-view scroll-y= "true" scroll-left="0" :scroll-top="scrollTop" scroll-with-animation="true" style="background-color: #ffffff;">
 					<view class="glance-shop-classify-right-item">
 						<view v-for="(item,index) in activesubitems" :key='index' style="width: 95%;">
 							<!-- 右侧子分类标题 -->
-							<view style="height: 25px;font-size: 0.8rem;text-align: left;border-bottom: solid 1px #F5F5F5;margin-bottom: 20px;">{{ item.subtitel }}</view>
+							<view style="height: 25px;font-size: 0.8rem;text-align: left;border-bottom: solid 1px #F5F5F5;margin-bottom: 20px;">{{ item.actsubtitel }}</view>
 							<!-- 右侧子分类项目图文 -->
 							<view style="display: flex; display: -webkit-flex;	flex-flow: row wrap;align-items: flex-start;justify-content: flex-start;" >
 							<view v-for="(subitem,k) in item.subitem" :key='k' style="width:33.33%;">
-								<image :src="subitem.itemimgsrc" style="height: 100px; width:100%;" @click="clickitemhref(subitem.itemimghref)" lazy-load="true"></image>
+								<image :src="subitem.itemimgsrc" style="height: 100px; width:100%;" @click="clickitemhref(subitem.itemimghref)" :lazy-load="true"></image>
 								<view style="height: 20px;line-height: 20px; font-size: 0.7rem;text-align: center;margin-bottom: 20px;">{{ subitem.itemtitel }}</view>
 							</view>
 							</view>
@@ -351,9 +351,10 @@
 				}
 				// 不存在子项目对象数组时 添加
 				if (isexistsubitem == 0){
-					let subitem={'subtitel':'','subitem':[]}
+					let subitem={'subtitel':'','actsubtitel':'', 'subitem':[]}
 					
 					subitem['subtitel'] = item.maintitel+'-'+item.subtitel
+					subitem['actsubtitel'] = item.subtitel
 					subitem['subitem'] = []
 					this.subitems.push(subitem)
 					// console.log(this.subbanners)
